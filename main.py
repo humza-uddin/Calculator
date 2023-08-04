@@ -25,7 +25,7 @@ def button_add():
     global f_num
     global math
     math = "addition"
-    f_num = int(first_number)
+    f_num = float(first_number)
     entry_1.delete(0,END)
 
 def button_sub():
@@ -33,7 +33,7 @@ def button_sub():
     global f_num
     global math
     math = "subtraction"
-    f_num = int(first_number)
+    f_num = float(first_number)
     entry_1.delete(0,END)
 
 def button_mul():
@@ -41,7 +41,7 @@ def button_mul():
     global f_num
     global math
     math = "multiplication"
-    f_num = int(first_number)
+    f_num = float(first_number)
     entry_1.delete(0,END)
 
 def button_div():
@@ -49,26 +49,22 @@ def button_div():
     global f_num
     global math
     math = "division"
-    f_num = int(first_number)
+    f_num = float(first_number)
     entry_1.delete(0,END)
 
 def button_equal():
-    if button_add:
         second_number = entry_1.get()
         entry_1.delete(0,END)
-        entry_1.insert(0, f_num + int(second_number))
-    elif button_sub:
-        second_number = entry_1.get()
-        entry_1.delete(0,END)
-        entry_1.insert(0, f_num - int(second_number))
-    elif button_mul:
-        second_number = entry_1.get()
-        entry_1.delete(0,END)
-        entry_1.insert(0, f_num * int(second_number))
-    elif button_div:
-        second_number = entry_1.get()
-        entry_1.delete(0,END)
-        entry_1.insert(0, f_num / int(second_number))
+        
+        if math == "addition":
+            entry_1.insert(0, f_num + float(second_number))
+        elif math == "subtraction":
+            entry_1.insert(0, f_num - float(second_number))
+        elif math == "multiplication":
+            entry_1.insert(0, f_num * float(second_number))
+        elif math == "division":
+            entry_1.insert(0, f_num / float(second_number))
+    
 
 def change_appearance_mode_event(values: str):
     customtkinter.set_appearance_mode(values)
