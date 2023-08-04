@@ -1,5 +1,6 @@
 from tkinter import *
 import customtkinter
+from customtkinter import ThemeManager
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -12,17 +13,78 @@ entry_1.grid(row=0, column=1, columnspan = 4,pady=10, padx=10)
 
 
 def button_click(number):
+    current = entry_1.get()
     entry_1.delete(0, END)
-    entry_1.insert(0, number)
+    entry_1.insert(0, str(current) +str(number))
 
+def button_clear():
+    entry_1.delete(0,END)
+
+def button_add():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "addition"
+    f_num = int(first_number)
+    entry_1.delete(0,END)
+
+def button_sub():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "subtraction"
+    f_num = int(first_number)
+    entry_1.delete(0,END)
+
+def button_mul():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "multiplication"
+    f_num = int(first_number)
+    entry_1.delete(0,END)
+
+def button_div():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "division"
+    f_num = int(first_number)
+    entry_1.delete(0,END)
+
+def button_equal():
+    if button_add:
+        second_number = entry_1.get()
+        entry_1.delete(0,END)
+        entry_1.insert(0, f_num + int(second_number))
+    elif button_sub:
+        second_number = entry_1.get()
+        entry_1.delete(0,END)
+        entry_1.insert(0, f_num - int(second_number))
+    elif button_mul:
+        second_number = entry_1.get()
+        entry_1.delete(0,END)
+        entry_1.insert(0, f_num * int(second_number))
+    elif button_div:
+        second_number = entry_1.get()
+        entry_1.delete(0,END)
+        entry_1.insert(0, f_num / int(second_number))
 
 def change_appearance_mode_event(values: str):
     customtkinter.set_appearance_mode(values)
 
+def set_default_color_theme(values: str):
+    """ set color theme or load custom theme file by passing the path """
+    ThemeManager.load_theme(values)
 
-appearance_mode_optionemenu = customtkinter.CTkOptionMenu(window, values=["Light", "Dark", "System"],
+
+appearance_mode_optionemenu = customtkinter.CTkOptionMenu(window, width=20, height=50, corner_radius=8, values=["Light", "Dark", "System"],
                                                                        command=change_appearance_mode_event)
-appearance_mode_optionemenu.grid(row=6, column=0, padx=20, pady=(10, 10))
+appearance_mode_optionemenu.grid(row=0, column=0, padx=1, pady=2)
+
+set_default_color_theme_optionmenu = customtkinter.CTkOptionMenu(window, width=20, height=50, corner_radius=8, values=["blue", "dark-blue", "green"],
+                                                                       command=set_default_color_theme)
+set_default_color_theme_optionmenu.grid(row=1, column=0, padx=1, pady=2)
 
 
 
@@ -54,23 +116,23 @@ button_brac1.grid(row=4, column=1, padx=1, pady=2)
 button_brac2 = customtkinter.CTkButton(window, text=")", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click(')'))
 button_brac2.grid(row=4, column=3, padx=1, pady=2)
 
-button_plus = customtkinter.CTkButton(window, text="+", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
+button_plus = customtkinter.CTkButton(window, text="+", width=70, height=70, border_width=0, corner_radius=8, command=lambda:  button_add())# [button_click('+'), button_add()])
 button_plus.grid(row=1, column=4, padx=1, pady=2)
-button_sub = customtkinter.CTkButton(window, text="-", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_sub.grid(row=2, column=4, padx=1, pady=2)
-button_mul = customtkinter.CTkButton(window, text="x", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_mul.grid(row=3, column=4, padx=1, pady=2)
-button_div = customtkinter.CTkButton(window, text="/", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_div.grid(row=4, column=4, padx=1, pady=2)
+button_subt = customtkinter.CTkButton(window, text="-", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_sub())#[button_click('-'), button_sub()])
+button_subt.grid(row=2, column=4, padx=1, pady=2)
+button_mult = customtkinter.CTkButton(window, text="x", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_mul())#[button_click('x'), button_mul()])
+button_mult.grid(row=3, column=4, padx=1, pady=2)
+button_divd = customtkinter.CTkButton(window, text="/", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_div())#[button_click('/'), button_div()])
+button_divd.grid(row=4, column=4, padx=1, pady=2)
 
-button_equal = customtkinter.CTkButton(window, text="=", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_equal.grid(row=5, column=4, padx=1, pady=2)
-button_dot = customtkinter.CTkButton(window, text=".", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
+button_equal1 = customtkinter.CTkButton(window, text="=", width=70, height=70, border_width=0, corner_radius=8, command=button_equal)
+button_equal1.grid(row=5, column=4, padx=1, pady=2)
+button_dot = customtkinter.CTkButton(window, text=".", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click('.'))
 button_dot.grid(row=5, column=3, padx=1, pady=2)
-button_clear = customtkinter.CTkButton(window, text="C", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_clear.grid(row=5, column=2, padx=1, pady=2)
-button_remove = customtkinter.CTkButton(window, text="R", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
-button_remove.grid(row=5, column=1, padx=1, pady=2)
+button_clear1 = customtkinter.CTkButton(window, text="C", width=70, height=70, border_width=0, corner_radius=8, command=button_clear)
+button_clear1.grid(row=5, column=2, padx=1, pady=2)
+button_remove1 = customtkinter.CTkButton(window, text="R", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
+button_remove1.grid(row=5, column=1, padx=1, pady=2)
 
 
 window.mainloop()
