@@ -20,6 +20,9 @@ def button_click(number):
 def button_clear():
     entry_1.delete(0,END)
 
+def button_remove():
+    entry_1.delete( len(entry_1.get())-1 )
+
 def button_add():
     first_number = entry_1.get()
     global f_num
@@ -52,6 +55,22 @@ def button_div():
     f_num = float(first_number)
     entry_1.delete(0,END)
 
+def button_raise():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "power"
+    f_num = float(first_number)
+    entry_1.delete(0,END)
+
+def button_mod():
+    first_number = entry_1.get()
+    global f_num
+    global math
+    math = "modulus"
+    f_num = float(first_number)
+    entry_1.delete(0,END)
+
 def button_equal():
         second_number = entry_1.get()
         entry_1.delete(0,END)
@@ -64,6 +83,10 @@ def button_equal():
             entry_1.insert(0, f_num * float(second_number))
         elif math == "division":
             entry_1.insert(0, f_num / float(second_number))
+        elif math == "power":
+            entry_1.insert(0, f_num ** float(second_number))
+        elif math == "modulus":
+            entry_1.insert(0, f_num % float(second_number))
     
 
 def change_appearance_mode_event(values: str):
@@ -107,10 +130,10 @@ button_9.grid(row=1, column=3, padx=1, pady=2)
 
 button_0 = customtkinter.CTkButton(window, text="0",  width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click(0))
 button_0.grid(row=4, column=2, padx=1, pady=2)
-button_brac1 = customtkinter.CTkButton(window, text="(",  width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click('('))
-button_brac1.grid(row=4, column=1, padx=1, pady=2)
-button_brac2 = customtkinter.CTkButton(window, text=")", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click(')'))
-button_brac2.grid(row=4, column=3, padx=1, pady=2)
+button_raise1 = customtkinter.CTkButton(window, text="^",  width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_raise())
+button_raise1.grid(row=4, column=1, padx=1, pady=2)
+button_mod1 = customtkinter.CTkButton(window, text="%", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_mod())
+button_mod1.grid(row=4, column=3, padx=1, pady=2)
 
 button_plus = customtkinter.CTkButton(window, text="+", width=70, height=70, border_width=0, corner_radius=8, command=lambda:  button_add())# [button_click('+'), button_add()])
 button_plus.grid(row=1, column=4, padx=1, pady=2)
@@ -127,7 +150,7 @@ button_dot = customtkinter.CTkButton(window, text=".", width=70, height=70, bord
 button_dot.grid(row=5, column=3, padx=1, pady=2)
 button_clear1 = customtkinter.CTkButton(window, text="C", width=70, height=70, border_width=0, corner_radius=8, command=button_clear)
 button_clear1.grid(row=5, column=2, padx=1, pady=2)
-button_remove1 = customtkinter.CTkButton(window, text="R", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_click())
+button_remove1 = customtkinter.CTkButton(window, text="R", width=70, height=70, border_width=0, corner_radius=8, command=lambda: button_remove())
 button_remove1.grid(row=5, column=1, padx=1, pady=2)
 
 
